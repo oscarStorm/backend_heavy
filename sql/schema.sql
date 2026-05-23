@@ -5,8 +5,9 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 CREATE TABLE IF NOT EXISTS resources (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    description TEXT,
-    active BOOLEAN NOT NULL DEFAULT TRUE
+    capacity INT,
+    tablename VARCHAR(255),
+    active BOOL NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS bookings (
@@ -17,8 +18,6 @@ CREATE TABLE IF NOT EXISTS bookings (
 
     start_time DATETIME NOT NULL,
     end_time DATETIME NOT NULL,
-
-    status ENUM('ACTIVE', 'CANCELLED') NOT NULL DEFAULT 'ACTIVE',
 
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
