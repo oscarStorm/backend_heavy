@@ -1,7 +1,15 @@
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from datetime import datetime
+
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 
 class CustomerCreate(BaseModel):
+    name: str
+    email: EmailStr
+
+
+class CustomerResponse(BaseModel):
+    id: int
     name: str
     email: EmailStr
 
@@ -12,10 +20,27 @@ class RestaurantTableCreate(BaseModel):
     active: bool = True
 
 
+class RestaurantTableResponse(BaseModel):
+    id: int
+    capacity: int
+    tablename: str
+    active: bool
+
+
 class Booking(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
     customer_id: int
     resource_id: int
-    start_time: str
-    end_time: str = Field(alias="endtime")
+    start_time: datetime
+    end_time: datetime
+
+
+class BookingResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    id: int
+    customer_id: int
+    resource_id: int
+    start_time: datetime
+    end_time: datetime
